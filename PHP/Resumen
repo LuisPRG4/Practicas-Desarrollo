@@ -1,0 +1,12 @@
+Durante el proceso, se pudo implementar sin problemas el formulario que permite a los usuarios dejar comentarios. Estos 
+comentarios se almacenan en una base de datos llamada comments.sql y se muestran en una sección dentro de la página. 
+Para organizar mejor la información, utilicé una tabla que muestra cada comentario junto con los datos del usuario 
+que lo dejó.
+
+Para lograr esto, consulté varios recursos en línea en W3Schools y otros materiales de referencia que me dieron una idea de
+la estructura y funcionalidad necesarias. Sin embargo, hubo algunos inconvenientes que no se pudieron solucionar en 
+esta fase del proyecto. Por ejemplo, la tabla donde se muestran los comentarios no pudo ser centrada correctamente a pesar 
+de los ajustes en el archivo de estilos, y no se lograron implementar los botones para editar y eliminar comentarios.
+
+A pesar de estos pequeños detalles, el resultado final es completamente funcional y cumple con el objetivo de permitir la 
+interacción de los usuarios mediante comentarios.
