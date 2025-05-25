@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Música - Tu Colección Personal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oooh+Baby&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="site-title-wrapper"> <a href="musica.html" class="logo-link"> <img src="img/LOGO/LOGO.png" alt="Logo de Mi Biblioteca Musical" class="site-logo"> <h1>Ritmos Infinitos</h1>
+            </a>
+        </div>
+
+            <button class="menu-toggle" aria-label="Abrir menú de navegación">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+            </button>
+
+        <div class="main-nav-wrapper"> 
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="musica.html">Mi Música</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="custom-audio-player" class="container fade-in-section">
+    <h2>REPRODUCIENDO:</h2>
+    <div class="player-container">
+        <div class="current-song-info">
+            <img id="player-artwork" src="img/default_artwork.jpg" alt="Carátula de la canción actual">
+            <div class="song-details">
+                <h3 id="player-title">Título de la Canción</h3>
+                <p id="player-artist">Nombre del Artista</p>
+            </div>
+        </div>
+
+        <div class="player-controls">
+            <div class="progress-bar-container">
+                <div id="player-progress-bar" class="progress-bar"></div>
+                <input type="range" id="player-seek" value="0" min="0" max="100">
+            </div>
+            <div class="time-display">
+                <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+            </div>
+            <div class="buttons">
+                <button id="prev-btn" class="player-button"><i class="fas fa-step-backward"></i></button>
+                <button id="play-pause-btn" class="player-button"><i class="fas fa-play"></i></button>
+                <button id="next-btn" class="player-button"><i class="fas fa-step-forward"></i></button>
+                <div class="volume-controls">
+                <button id="mute-btn" class="player-button"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+            </div>
+        </div>
+
+        <div class="our-names-bar">
+            <p>💖 LUIS & ESTELA 💖</p>
+        </div>
+        </div>
+    </div>
+
+    <h3>Mi Lista de Reproducción</h3>
+    <ul id="playlist" class="playlist-container">
+        </ul>
+</section>
+
+        <section id="playlist-categories" class="container fade-in-section">
+            <h2>Mis Colecciones y Géneros</h2>
+            <p class="category-intro">Aquí puedes navegar por mis diferentes listas de reproducción, organizadas por estilo o estado de ánimo.</p>
+
+            <div class="category-grid">
+                <div class="playlist-category fade-in-item" data-playlist-name="Salsa de Erick Franchesky">
+                    <img src="img/Artistas/1. Erick Franchesky - ART.jpg" alt="Categoría Salsa">
+                    <h3>Erick Franchesky</h3>
+                    <p>Erick Franchesky es un cantante y compositor venezolano de salsa. Nació el 30 de 
+                        mayo de 1962, en Vargas, Venezuela. Ganó popularidad, gracias a su talento, 
+                        llevándolo a participar en afamadas agrupaciones de salsa en su país. (V.E.N.E.Z.U.E.L.A)</p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+
+                <div class="playlist-category fade-in-item" data-playlist-name="Salsa - David Zahan">
+                    <img src="img/Artistas/3. David Zahan.jpg" alt="Categoría Salsa David Zahan">
+                    <h3>David Zahan</h3>
+                    <p>Andrés David Saldarriaga, más conocido en el ámbito musical como David Zahan quien 
+                        ha destacado como un gran cantante y compositor de salsa.</p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+                
+                <div class="playlist-category fade-in-item" data-playlist-name="Salsa - Eddie Santiago">
+                    <img src="img/Artistas/4. Eddie Santiago.jpg" alt="Eddie Santiago">
+                    <h3>Eddie Santiago</h3>
+                    <p>Eddie Santiago (nacido Eduardo Santiago Rodríguez el 18 de agosto de 1955) es un 
+                        cantante puertorriqueño de salsa, conocido como el "Rey de la Salsa Romántica". 
+                        Su estilo interpretativo, caracterizado por medias voces y susurros, ha sido clave
+                        en la evolución de la salsa romántica. </p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+
+                <div class="playlist-category fade-in-item" data-playlist-name="Salsa - Willie González">
+                    <img src="img/Artistas/5. Willie González.jpg" alt="Willie González">
+                    <h3>Willie González</h3>
+                    <p>Willie González es un icónico cantante puertorriqueño conocido por su salsa romántica
+                        y sensual, con una discografía repleta de éxitos latinos. Su estilo se describe como 
+                        bachata-merengue, mezclando elementos de ambos géneros, y se centra en baladas románticas
+                        y canciones bailables. </p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+
+                <div class="playlist-category fade-in-item" data-playlist-name="Salsa - Paquito Guzmán">
+                    <img src="img/Artistas/6. Paquito Guzmán.jpg" alt="Paquito Guzmán">
+                    <h3>Paquito Guzmán</h3>
+                    <p>Fue un cantante puertorriqueño, considerado uno de los máximos exponentes de la salsa
+                        romántica. Nacido el 20 de noviembre de 1939 en Santurce, Puerto Rico, y fallecido el 
+                        9 de diciembre de 2021 en Toa Baja, Puerto Rico, Guzmán dejó una huella significativa 
+                        en la música latina.</p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+
+                <div class="playlist-category fade-in-item" data-playlist-name="Salsa - Tito Rojas">
+                    <img src="img/Artistas/7. Tito Rojas.jpg" alt="Tito Rojas">
+                    <h3>Tito Rojas</h3>
+                    <p>Tito Rojas, cuyo nombre completo era Julio César Rojas López, fue un cantante y compositor
+                        de salsa puertorriqueño, ampliamente conocido como "El Gallo Salsero". Nació en Humacao, 
+                        Puerto Rico, el 14 de junio de 1955 y falleció en la misma ciudad el 26 de diciembre de 2020,
+                        a los 65 años, tras sufrir un infarto. </p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+
+                <div class="playlist-category fade-in-item" data-playlist-name="dj-yoval-gonzalez">
+                    <img src="img//Artistas/2. DJ YOVAL GONZÁLEZ - ART.png" alt="Dj Yoval Gonzalez">
+                    <h3>AfroHouse - Dj Yoval Gonzalez (V.E.N.E.Z.U.E.L.A)</h3>
+                    <p>Yoval González es un DJ y productor musical de música house y afro house, 
+                        reconocido por su estilo ecléctico y su enfoque en la música underground. 
+                        Su música ha sido lanzada por sellos discográficos como Powerbeat, y sus tracks
+                        han sido reproducidos en diversas plataformas de música electrónica, incluyendo Beatport. </p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+
+                <div class="playlist-category fade-in-item" data-playlist-name="Grupo Galé">
+                    <img src="img/Artistas/8. Grupo Galé.jpg" alt="Grupo Galé">
+                    <h3>Grupo Galé</h3>
+                    <p>El Grupo Galé es una agrupación colombiana de salsa fundada por el percusionista Diego Galé, quien 
+                       además ha trabajado para grupos tales como Fruko, Grupo Niche, entre otros. El padre de Diego Galé,
+                       Jaime Galé, Un hermano, Jimmy, tocó los timbales en el grupo y otro de sus hermanos, Freddy, toca 
+                       saxofón.</p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+
+                <div class="playlist-category fade-in-item" data-playlist-name="Raulin Rosendo">
+                    <img src="img/Artistas/Raulin Rosendo.jpg" alt="Raulin Rosendo">
+                    <h3>Raulin Rosendo</h3>
+                    <p>Raulín Rosendo es un cantante de salsa dominicano nacido en Villa Duarte el 30 de agosto de 1957. 
+                       Es conocido como "El Sonero Enfadado" y ha grabado varios álbumes de éxito, incluyendo "Salsa, 
+                       Solamente Salsa" (1991) y "Donde me coja la noche" (1999). </p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+
+                <div class="playlist-category fade-in-item" data-playlist-name="Frankie Ruiz">
+                    <img src="img/Artistas/10. Frankie Ruiz.jpg" alt="Frankie Ruiz">
+                    <h3>Frankie Ruiz</h3>
+                    <p>José Antonio Torresola Ruiz (Paterson, 10 de marzo de 1958-Newark, 9 de agosto de 1998), conocido 
+                       artísticamente como Frankie Ruiz, fue un músico, cantante, compositor y director musical, de salsa
+                       caribeña y latinoamericana puertorriqueño.</p>
+                    <button class="view-playlist-btn">Ver Playlist</button>
+                </div>
+                
+                </div> <div class="pagination-controls">
+                <button id="prevCategoryPage" class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                <div id="paginationNumbers" class="pagination-numbers">
+                    </div>
+                <button id="nextCategoryPage" class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+        </section>
+
+        <section id="discography" class="container fade-in-section">
+            <h2>Explora Mi Colección</h2>
+
+            <div class="album fade-in-item">
+                <div class="album-header">
+                    <img src="img/AfroHouse.png" alt="Carátula del Álbum Ejemplo">
+                    <div class="album-info">
+                        <h3>Álbum Favorito: Vibraciones Nocturnas</h3>
+                        <p class="release-date">Fecha de Lanzamiento: 2023</p>
+                        <p class="album-description">Este álbum representa una exploración profunda de [género musical] fusionado con [otro género/influencia]. Cada pista cuenta una historia...</p>
+                    </div>
+                </div>
+                <div class="tracklist">
+                    <h4>Pistas Principales:</h4>
+                    <div class="track-item" data-src="audio/Dj Yoval Gonzalez/Agua Ardiente  DJ Yoval Gonzalez Original Mix.mp3" data-title="Aguardiente" data-artist="Dj Yoval Gonzalez" data-artwork="img/Caratulas/Aguardiente.png">
+
+                        <h5>1. <span class="playable-song">Aguardiente</span></h5>
+                                                
+                        <p class="track-description">La pista que abre el álbum, con un ritmo que engancha.</p>
+                    </div>
+
+                    <div class="track-item" data-src="audio/Dj Yoval Gonzalez/La isla Bonita - DJ Yoval Gonzalez (Afro Lantin Remix).mp3" data-title="La Isla Bonita" data-artist="Dj Yoval Gonzalez" data-artwork="img/Caratulas/La Isla Bonita.png">
+                        
+                        <h5>1. <span class="playable-song">La Isla Bonita</span></h5>
+                        
+                        <p class="track-description">DESCRIPCIÓN PARA LUEGO</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="single-track fade-in-item" data-src="audio/Dj Yoval Gonzalez/Oliver Twist - DJ Yoval Gonzalez (Mashup) _afrolatin _remix.mp3" data-title="Oliver Twist" data-artist="Dj Yoval Gonzalez" data-artwork="img/Caratulas/Oliver Twist.png">
+                <img src="img/Caratulas/Oliver Twist.png" alt="Carátula del Sencillo Ejemplo">
+                <div class="single-info">
+                    <h3>Mi Última Adición: <span class="playable-song">Oliver Twist</span></h3>
+
+                    <p class="release-date">Añadida: Marzo 2024</p>
+                    <p class="single-description">Descubrí esta pista hace poco y se ha convertido rápidamente en una favorita para relajarme.</p>                    
+                    <a href="https://www.youtube.com/watch?v=tu_video_aqui" target="_blank" class="video-link">Ver en YouTube (si aplica)</a>                     
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Mi Biblioteca Musical. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">YouTube</a>
+            </div>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

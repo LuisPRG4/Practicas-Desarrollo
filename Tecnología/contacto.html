@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Mi Biblioteca Musical</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+             <div class="site-title-wrapper"> <a href="contacto.html" class="logo-link"> <img src="img/LOGO/LOGO.png" alt="Logo de Mi Biblioteca Musical" class="site-logo"> <h1>Ritmos Infinitos</h1>
+            </a>
+        </div>
+            
+            <button class="menu-toggle" aria-label="Abrir menú de navegación">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            <div class="main-nav-wrapper">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="musica.html">Mi Música</a></li> 
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="contact" class="container fade-in-section">
+            <h2>Hablemos de Música</h2> <p class="intro-text">¿Quieres compartir alguna joya musical, comentar sobre el sitio, o simplemente charlar sobre este proyecto? ¡Estoy aquí para escucharte!</p>
+
+            <div class="contact-content">
+                <div class="contact-form-wrapper">
+                    <form action="YOUR_FORM_SUBMISSION_SERVICE_URL" method="POST" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Tu Nombre:</label>
+                            <input type="text" id="name" name="name" required placeholder="Cómo te llamas">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Tu Correo Electrónico:</label>
+                            <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Asunto:</label>
+                            <input type="text" id="subject" name="subject" placeholder="Ej: Recomendación musical">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Tu Mensaje:</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Escribe tu mensaje o sugerencia musical aquí..."></textarea>
+                        </div>
+                        <button type="submit" class="call-to-action">Enviar Mensaje</button>
+                    </form>
+                    <div id="formStatus" class="form-status"></div>
+                </div>
+
+                <div class="contact-info-aside">
+                    <h3>Conéctate:</h3>
+                    <ul>
+                        <li><strong>Email:</strong> <a href="mailto:tu.email@ejemplo.com">tu.email@ejemplo.com</a></li>
+                        </ul>
+                    <h3>Mis Redes Musicales:</h3>
+                    <p>Aunque este sitio es personal, puedes encontrarme en estas plataformas compartiendo mi pasión:</p>
+                    <div class="social-links-contact">
+                        <a href="#" target="_blank">Mi Perfil Musical</a> <a href="#" target="_blank">Mi Playlist Favorita</a> </div>
+                    <p class="note">Me encanta recibir recomendaciones, así que no dudes en escribirme.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 Mi Biblioteca Musical. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
