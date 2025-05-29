@@ -64,12 +64,12 @@
         margin: 0;
     }
 
-    /* NUEVO: Reducir tamaño del título de la app en móviles */
+    /* NUEVO: Reducir tamaño del título de la app en móviles 
     @media (max-width: 767px) {
         .app-title {
-            font-size: 1.75rem; /* text-3xl */
-        }
-    }
+            font-size: 1.75rem; /* text-3xl 
+        } 
+    } */
 
     /* Navegación por pestañas */
     .app-nav {
@@ -81,17 +81,17 @@
         flex-wrap: wrap;
     }
 
-    /* Ajustar el padding de los botones en móviles */
+    /* Ajustar el padding de los botones en móviles 
     @media (max-width: 767px) {
         .nav-button {
-            padding: 8px 15px; /* Reducir padding */
-            font-size: 0.9rem; /* Un poco más pequeño */
+            padding: 8px 15px; /* Reducir padding 
+            font-size: 0.9rem; /* Un poco más pequeño 
         }
         .app-nav {
-            gap: 6px; /* Menor espacio entre botones */
+            gap: 6px; /* Menor espacio entre botones 
             margin-bottom: 16px;
         }
-    }
+    } */
 
     .nav-button {
         background-color: var(--border-color);
@@ -129,12 +129,12 @@
         display: block; /* Visible cuando está activo */
     }
 
-    /* NUEVO: Reducir padding del contenido de las pestañas en móviles */
+    /* NUEVO: Reducir padding del contenido de las pestañas en móviles 
     @media (max-width: 767px) {
         .tab-content {
             padding: 18px;
         }
-    }
+    } */
 
     .section-title {
         font-size: 1.5rem; /* text-2xl */
@@ -145,14 +145,14 @@
         text-align: center;
     }
 
-    /* NUEVO: Reducir tamaño de los títulos de sección en móviles */
+    /* NUEVO: Reducir tamaño de los títulos de sección en móviles 
     @media (max-width: 767px) {
         .section-title {
-            font-size: 1.25rem; /* text-xl */
+            font-size: 1.25rem; /* text-xl 
             margin-bottom: 16px;
         }
-    }
-
+    } */
+ 
     /* Dashboard */
     .dashboard-stats {
         display: grid;
@@ -161,25 +161,25 @@
         margin-bottom: 32px; /* mb-8 */
     }
 
-    /* NUEVO: Ajustar minmax para pantallas muy pequeñas, si es necesario */
-    @media (max-width: 600px) { /* Un breakpoint más pequeño para el dashboard */
+    /* NUEVO: Ajustar minmax para pantallas muy pequeñas, si es necesario 
+    @media (max-width: 600px) { /* Un breakpoint más pequeño para el dashboard 
         .dashboard-stats {
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Más pequeño */
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Más pequeño 
             gap: 16px;
             margin-bottom: 24px;
         }
-    }
+    } */
 
-    /* Ajustar el tamaño de fuente en las tarjetas de estadísticas */
+    /* Ajustar el tamaño de fuente en las tarjetas de estadísticas 
     @media (max-width: 767px) {
         .stat-card h3 {
-            font-size: 1rem; /* text-base */
+            font-size: 1rem; /* text-base 
             margin-bottom: 4px;
         }
         .stat-value {
-            font-size: 1.75rem; /* text-3xl */
+            font-size: 1.75rem; /* text-3xl 
         }
-    }
+    } */
 
     .stat-card {
         background-color: var(--card-background);
@@ -211,23 +211,24 @@
         gap: 32px;
     }
 
-    @media (min-width: 768px) { /* md */
+   /* @media (min-width: 768px) { /* md 
         .dashboard-charts {
-            grid-template-columns: 1fr 1fr; /* 2 columnas en pantallas más grandes */
+            grid-template-columns: 1fr 1fr; /* 2 columnas en pantallas más grandes 
         }
-    }
+    } */
 
-    /* Asegurarse de que el padding del contenedor del gráfico se ajuste en móviles */
+    /* Asegurarse de que el padding del contenedor del gráfico se ajuste en móviles 
     @media (max-width: 767px) {
         .chart-container {
             padding: 15px; /* Reducir padding */
-            height: 250px; /* O un poco menos si 300px es mucho en vertical para móviles */
+           /* height: 250px; */ /* O un poco menos si 300px es mucho en vertical para móviles 
         }
         .chart-container h3 {
-            font-size: 1.1rem; /* text-lg */
+            font-size: 1.1rem; /* text-lg 
             margin-bottom: 12px;
         }
-    }
+    } */
+    
 
     .chart-container {
         background-color: var(--card-background);
@@ -316,30 +317,30 @@
     color: #000000; /* Un gris más claro para el texto del placeholder */
 }
 
-    /* NUEVO: Ajustes para inputs y textareas en móviles */
+    /* NUEVO: Ajustes para inputs y textareas en móviles 
     @media (max-width: 767px) {
         .form-group label {
-            font-size: 0.9rem; /* Un poco más pequeño */
+            font-size: 0.9rem; /* Un poco más pequeño 
             margin-bottom: 6px;
         }
         .form-group input[type="text"],
         .form-group input[type="number"],
-        .form-group input[type="date"], /* Added input type date */
+        .form-group input[type="date"], /* Added input type date 
         .form-group textarea,
         .form-group select { /* Added select */
-            padding: 8px; /* Reducir padding */
-            font-size: 0.95rem; /* Un poco más pequeño */
+              /*padding: 8px; /* Reducir padding */
+            /* font-size: 0.95rem; /* Un poco más pequeño 
         }
         .form-group {
-            margin-bottom: 12px; /* Reducir espaciado entre grupos */
+            margin-bottom: 12px; /* Reducir espaciado entre grupos 
         }
         .product-info-card,
         .sales-form-card,
         .inventory-form-card {
-            padding: 18px; /* Reducir padding de las tarjetas de formulario */
-            margin-bottom: 18px; /* Reducir margin-bottom */
+            padding: 18px; /* Reducir padding de las tarjetas de formulario 
+            margin-bottom: 18px; /* Reducir margin-bottom 
         }
-    }
+    } */
 
     .product-info-card,
     .sales-form-card,
@@ -377,18 +378,18 @@
         margin-right: 8px; /* mr-2 */
     }
 
-    /* NUEVO: Ajustes para botones en móviles */
+    /* NUEVO: Ajustes para botones en móviles 
     @media (max-width: 767px) {
         .btn {
-            padding: 8px 16px; /* Reducir padding */
-            font-size: 0.9rem; /* Un poco más pequeño */
-            margin-right: 6px; /* Menor margen entre botones */
+            padding: 8px 16px; /* Reducir padding 
+            font-size: 0.9rem; /* Un poco más pequeño 
+            margin-right: 6px; /* Menor margen entre botones 
         }
         .adjustment-buttons {
-            gap: 8px; /* Reducir gap en botones de ajuste */
+            gap: 8px; /* Reducir gap en botones de ajuste 
             margin-top: 12px;
         }
-    }
+    }*/ 
 
     .btn:last-child {
         margin-right: 0;
@@ -447,16 +448,16 @@
         white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
     }
 
-    /* NUEVO: Reducir padding de celdas en móviles */
+    /* NUEVO: Reducir padding de celdas en móviles 
     @media (max-width: 767px) {
         .data-table {
-            font-size: 0.8rem; /* Aún más pequeño para móviles */
+            font-size: 0.8rem; /* Aún más pequeño para móviles 
             margin-top: 15px;
         }
         .data-table th, .data-table td {
-            padding: 10px 15px; /* Reducir padding de las celdas */
+            padding: 10px 15px; /* Reducir padding de las celdas 
         }
-    }
+    } */
 
     .data-table th, .data-table td {
         padding: 16px 24px; /* px-6 py-4 */
@@ -518,4 +519,159 @@
     height: 300px; /* O una altura que consideres adecuada para tus gráficos */
     /* Puedes usar max-height si quieres que crezca hasta cierto punto pero no más allá */
     /* max-height: 400px; */
+}
+
+/* --- Ajustes Responsive Generales --- */
+
+/* Ajuste para pantallas pequeñas (móviles) */
+@media (max-width: 767px) { /* Esto aplica a pantallas de hasta 767px de ancho */
+    body {
+        padding: 10px; /* Reducir el padding global en móviles */
+    }
+    .app-container {
+        padding: 16px; /* Reducir el padding en móviles */
+        gap: 16px; /* Reducir el gap */
+    }
+}
+
+/* Reducir tamaño del título de la app en móviles */
+@media (max-width: 767px) {
+    .app-title {
+        font-size: 1.75rem; /* text-3xl */
+    }
+}
+
+/* Ajustar el padding y tamaño de fuente de los botones de navegación en móviles */
+@media (max-width: 767px) {
+    .nav-button {
+        padding: 8px 15px; /* Reducir padding */
+        font-size: 0.9rem; /* Un poco más pequeño */
+    }
+    .app-nav {
+        gap: 6px; /* Menor espacio entre botones */
+        margin-bottom: 16px;
+    }
+}
+
+/* Reducir padding del contenido de las pestañas en móviles */
+@media (max-width: 767px) {
+    .tab-content {
+        padding: 18px;
+    }
+}
+
+/* Reducir tamaño de los títulos de sección en móviles */
+@media (max-width: 767px) {
+    .section-title {
+        font-size: 1.25rem; /* text-xl */
+        margin-bottom: 16px;
+    }
+}
+
+/* Ajustar minmax para las tarjetas del dashboard en pantallas muy pequeñas */
+@media (max-width: 600px) { /* Un breakpoint más pequeño para el dashboard */
+    .dashboard-stats {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Más pequeño */
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+}
+
+/* Ajustar el tamaño de fuente en las tarjetas de estadísticas del dashboard */
+@media (max-width: 767px) {
+    .stat-card {
+        padding: 15px; /* Reducir padding de la tarjeta */
+    }
+    .stat-card h3 {
+        font-size: 1rem; /* text-base */
+        margin-bottom: 4px;
+    }
+    .stat-value {
+        font-size: 1.75rem; /* text-3xl */
+    }
+}
+
+/* Asegurarse de que el padding del contenedor del gráfico se ajuste en móviles */
+@media (max-width: 767px) {
+    .chart-container {
+        padding: 15px; /* Reducir padding */
+        height: 250px; /* Altura adecuada para móviles */
+    }
+    .chart-container h3 {
+        font-size: 1.1rem; /* text-lg */
+        margin-bottom: 12px;
+    }
+}
+
+/* Ajustes para botones en móviles */
+@media (max-width: 767px) {
+    .btn {
+        padding: 8px 16px; /* Reducir padding */
+        font-size: 0.9rem; /* Un poco más pequeño */
+        margin-right: 6px; /* Menor margen entre botones */
+    }
+    .adjustment-buttons {
+        gap: 8px; /* Reducir gap en botones de ajuste */
+        margin-top: 12px;
+    }
+}
+
+/* Reducir padding de celdas en tablas en móviles */
+@media (max-width: 767px) {
+    .data-table {
+        font-size: 0.8rem; /* Aún más pequeño para móviles */
+        margin-top: 15px;
+    }
+    .data-table th, .data-table td {
+        padding: 10px 15px; /* Reducir padding de las celdas */
+    }
+}
+
+/* Ajustes para inputs y textareas en móviles (combinados con los anteriores) */
+@media (max-width: 767px) {
+    .form-group label {
+        font-size: 0.9rem; /* Un poco más pequeño */
+        margin-bottom: 6px;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="date"],
+    .form-group textarea,
+    .form-group select {
+        padding: 8px; /* Reducir padding */
+        font-size: 0.95rem; /* Un poco más pequeño */
+    }
+    .form-group {
+        margin-bottom: 12px; /* Reducir espaciado entre grupos */
+    }
+    .product-info-card,
+    .sales-form-card,
+    .inventory-form-card {
+        padding: 18px; /* Reducir padding de las tarjetas de formulario */
+        margin-bottom: 18px; /* Reducir margin-bottom */
+    }
+}
+
+/* Estilos para los botones de navegación */
+/* Estos estilos se aplican misma tanto a los botones en el menú grande como al móvil */
+.nav-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover,
+.nav-button.active {
+  background-color: #374151; /* Equivalente a Tailwind's gray-700 */
+}
+
+/* Estilos adicionales para el menú móvil */
+/* El contenedor #mobile-menu ya usa la clase "hidden" de Tailwind, 
+   y este estilo añade una transición suave en caso de querer animar la opacidad. */
+#mobile-menu {
+  transition: opacity 0.3s ease;
 }
