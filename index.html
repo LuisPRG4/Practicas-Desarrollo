@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Ventas e Inventario (Offline)</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" "black-translucent" >
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="app-title">Mi Negocio</h1>
+        </header>
+
+        <nav class="app-nav">
+            <button class="nav-button active" data-tab="dashboard">Dashboard</button>
+            <button class="nav-button" data-tab="product">Producto</button>
+            <button class="nav-button" data-tab="sales">Ventas</button>
+            <button class="nav-button" data-tab="inventory">Inventario</button>
+        </nav>
+
+        <main class="app-main">
+            <section id="dashboard" class="tab-content active">
+                <h2 class="section-title">Panel de Control</h2>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3>Stock Actual</h3>
+                        <p id="current-stock" class="stat-value">Cargando...</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Unidades Vendidas</h3>
+                        <p id="total-units-sold" class="stat-value">Cargando...</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Ingresos Totales</h3>
+                        <p id="total-revenue" class="stat-value">Cargando...</p>
+                    </div>
+                </div>
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h3>Ventas por Día</h3>
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Estado del Inventario</h3>
+                        <canvas id="inventoryChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="product" class="tab-content hidden">
+                <h2 class="section-title">Información del Producto</h2>
+                <div class="product-info-card">
+                    <div id="product-display">
+                        <p><strong>Nombre:</strong> <span id="product-name-display">Cargando...</span></p>
+                        <p><strong>Descripción:</strong> <span id="product-description-display">Cargando...</span></p>
+                        <p><strong>Precio:</strong> <span id="product-price-display">Cargando...</span></p>
+                        <p><strong>Stock:</strong> <span id="product-stock-display">Cargando...</span></p>
+                        <button id="edit-product-button" class="btn btn-primary">Editar Producto</button>
+                    </div>
+
+                    <form id="product-edit-form" class="hidden">
+                        <div class="form-group">
+                            <label for="edit-product-name">Nombre:</label>
+                            <input type="text" id="edit-product-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-product-description">Descripción:</label>
+                            <textarea id="edit-product-description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-product-price">Precio:</label>
+                            <input type="number" id="edit-product-price" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-product-stock">Stock:</label>
+                            <input type="number" id="edit-product-stock" readonly title="El stock solo se ajusta en la sección de Inventario">
+                        </div>
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <button type="button" id="cancel-edit-button" class="btn btn-secondary">Cancelar</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="sales" class="tab-content hidden">
+                <h2 class="section-title">Registrar Venta</h2>
+                <div class="sales-form-card">
+                    <form id="record-sale-form">
+                        <div class="form-group">
+                            <label for="sale-quantity">Cantidad:</label>
+                            <input type="number" id="sale-quantity" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-name">Nombre del Cliente (Opcional):</label>
+                            <input type="text" id="customer-name">
+                        </div>
+                        <button type="submit" class="btn btn-success">Registrar Venta</button>
+                    </form>
+                </div>
+
+                <h2 class="section-title mt-8">Historial de Ventas</h2>
+                <div id="sales-history-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Cantidad</th>
+                                <th>Precio Total</th>
+                                <th>Cliente</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sales-history-tbody">
+                            <tr><td colspan="4" class="text-center">No hay ventas registradas.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="inventory" class="tab-content hidden">
+                <h2 class="section-title">Ajuste de Inventario</h2>
+                <div class="inventory-form-card">
+                    <form id="stock-adjustment-form">
+                        <div class="form-group">
+                            <label for="adjustment-quantity">Cantidad a ajustar:</label>
+                            <input type="number" id="adjustment-quantity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adjustment-reason">Razón del ajuste:</label>
+                            <input type="text" id="adjustment-reason" placeholder="Ej: Recibido, Dañado, Inventario Inicial" required>
+                        </div>
+                        <div class="adjustment-buttons">
+                            <button type="button" id="add-stock-button" class="btn btn-success">Añadir Stock</button>
+                            <button type="button" id="remove-stock-button" class="btn btn-danger">Quitar Stock</button>
+                        </div>
+                    </form>
+                </div>
+
+                <h2 class="section-title mt-8">Historial de Ajustes de Inventario</h2>
+                <div id="inventory-history-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Razón</th>
+                                <th>Cambio de Cantidad</th>
+                                <th>Nuevo Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-history-tbody">
+                            <tr><td colspan="4" class="text-center">No hay ajustes de inventario registrados.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch(error => {
+                        console.error('Fallo en el registro del Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+    
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="db.js"></script> <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="charts.js"></script>
+</body>
+</html>
