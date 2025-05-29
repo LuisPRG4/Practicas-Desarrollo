@@ -675,3 +675,10 @@
 #mobile-menu {
   transition: opacity 0.3s ease;
 }
+
+@media (max-width: 767px) {
+  .desktop-nav {
+    display: none !important;
+  }
+}
+
