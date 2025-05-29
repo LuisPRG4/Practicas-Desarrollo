@@ -4,7 +4,7 @@ const CACHE_NAME = 'gestion-ventas-v1';
 const urlsToCache = [
     './', // Caché el index.html
     './index.html',
-    './style.css',
+    './styles.css',
     './script.js',
     './db.js',
     './charts.js',
