@@ -53,6 +53,10 @@
         margin-bottom: 24px; /* AÑADIDO: Espacio entre el header y las pestañas */
     }
 
+    .app-header h1{
+        margin-bottom: 20px;
+    }
+
     .app-title {
         font-size: 2.25rem; /* text-4xl */
         font-weight: 700; /* font-bold */
