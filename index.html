@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Ventas e Inventario</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="utils/notifications.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans">
+    <div class="app-container max-w-6xl mx-auto p-4 md:p-8">
+        <header class="app-header text-center pb-6 md:pb-8 border-b border-gray-700 mb-6">
+            <h1 class="app-title text-4xl md:text-5xl font-bold text-blue-400 mb-4">LOS SS - SISTEMA DE GESTIÓN</h1>
+            
+            <!-- Botón hamburguesa solo en móviles -->
+            <div class="md:hidden flex justify-end mb-4">
+                <button id="menu-toggle" class="text-gray-200 focus:outline-none">
+                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Menú para pantallas medianas y grandes -->
+            <nav class="hidden md:flex justify-center space-x-2 md:space-x-4">
+                <button class="nav-button active" data-tab="dashboard">Resumen</button>
+                <button class="nav-button" data-tab="clientes">Clientes</button>
+                <button class="nav-button" data-tab="inventory">Inventario</button>
+                <button class="nav-button" data-tab="product">Productos</button>
+                <button class="nav-button" data-tab="reportes">Reportes</button>
+                <button class="nav-button" data-tab="sales">Ventas</button>       
+            </nav>
+
+            <!-- Menú móvil (inicialmente oculto) -->
+            <div id="mobile-menu" class="hidden md:hidden flex flex-col items-center space-y-2 mt-4">
+                <button class="nav-button" data-tab="dashboard">Resumen</button>
+                <button class="nav-button" data-tab="clientes">Clientes</button>
+                <button class="nav-button" data-tab="inventory">Inventario</button>
+                <button class="nav-button" data-tab="product">Productos</button>
+                <button class="nav-button" data-tab="reportes">Reportes</button>
+                <button class="nav-button" data-tab="sales">Ventas</button>                  
+            </div>
+        </header>
+
+        <main>
+            <section id="dashboard" class="tab-content active p-6 bg-gray-800 rounded-lg shadow-lg mb-6">
+                <h2 class="section-title text-2xl font-semibold mb-6 text-center text-blue-300">Dashboard General</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="stat-card bg-gray-700 p-5 rounded-lg text-center shadow-md">
+                        <h3 class="stat-label text-gray-400 text-lg mb-2">Stock Actual Total</h3>
+                        <p id="current-stock" class="stat-value text-4xl font-bold text-green-400">0</p>
+                    </div>
+                    <div class="stat-card bg-gray-700 p-5 rounded-lg text-center shadow-md">
+                        <h3 class="stat-label text-gray-400 text-lg mb-2">Unidades Vendidas Totales</h3>
+                        <p id="total-units-sold" class="stat-value text-4xl font-bold text-yellow-400">0</p>
+                    </div>
+                    <div class="stat-card bg-gray-700 p-5 rounded-lg text-center shadow-md">
+                        <h3 class="stat-label text-gray-400 text-lg mb-2">Ingresos Totales</h3>
+                        <p id="total-revenue" class="stat-value text-4xl font-bold text-purple-400">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="chart-container">
+                        <h3 class="text-xl font-semibold mb-4 text-center text-gray-300">Ingresos por Ventas (últimos días)</h3>
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="text-xl font-semibold mb-4 text-center text-gray-300">Inventario por Producto</h3>
+                        <canvas id="inventoryChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="product" class="tab-content p-6 bg-gray-800 rounded-lg shadow-lg mb-6">
+                <h2 class="section-title text-2xl font-semibold mb-6 text-center text-blue-300">Gestión de Productos</h2>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-300">Añadir Nuevo Producto</h3>
+                    <form id="product-form" class="space-y-4">
+                        <div>
+                            <label for="product-name-input" class="block text-gray-400 text-sm font-bold mb-2">Nombre del Producto:</label>
+                            <input type="text" id="product-name-input" placeholder="Nombre del Producto" required>
+                        </div>
+                        <div>
+                            <label for="product-description-input" class="block text-gray-400 text-sm font-bold mb-2">Descripción (Opcional):</label>
+                            <textarea id="product-description-input" placeholder="Descripción del Producto" rows="2"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="product-price-input" class="block text-gray-400 text-sm font-bold mb-2">Precio ($):</label>
+                                <input type="number" id="product-price-input" step="0.01" placeholder="Ej: 19.99" required min="0">
+                            </div>
+                            <div>
+                                <label for="product-initial-stock-input" class="block text-gray-400 text-sm font-bold mb-2">Stock Inicial:</label>
+                                <input type="number" id="product-initial-stock-input" placeholder="Ej: 100" required min="0">
+                            </div>
+                        </div>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Añadir Producto</button>
+                    </form>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-300">Lista de Productos</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-gray-700 rounded-lg overflow-hidden data-table">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Nombre</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Descripción</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Precio</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Stock</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-list-tbody" class="divide-y divide-gray-600">
+                                <!-- Lista de Productos -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="edit-product-section" class="hidden bg-gray-700 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-300">Editar Producto</h3>
+                    <form id="edit-product-form" class="space-y-4">
+                        <input type="hidden" id="edit-product-id">
+                        <div>
+                            <label for="edit-product-name" class="block text-gray-400 text-sm font-bold mb-2">Nombre:</label>
+                            <input type="text" id="edit-product-name" required>
+                        </div>
+                        <div>
+                            <label for="edit-product-description" class="block text-gray-400 text-sm font-bold mb-2">Descripción:</label>
+                            <textarea id="edit-product-description" rows="2"></textarea>
+                        </div>
+                        <div>
+                            <label for="edit-product-price" class="block text-gray-400 text-sm font-bold mb-2">Precio ($):</label>
+                            <input type="number" id="edit-product-price" step="0.01" required min="0">
+                        </div>
+                        <div class="flex space-x-4">
+                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">Guardar Cambios</button>
+                            <button type="button" id="cancel-edit-product-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-full">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="sales" class="tab-content p-6 bg-gray-800 rounded-lg shadow-lg mb-6">
+                <h2 class="section-title text-2xl font-semibold mb-6 text-center text-blue-300">Gestión de Ventas</h2>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-300">Registrar Nueva Venta</h3>
+                    <form id="record-sale-form" class="space-y-4">
+                        <div>
+                            <label for="sale-product-select" class="block text-gray-400 text-sm font-bold mb-2">Producto:</label>
+                            <select id="sale-product-select" required></select>
+                        </div>
+                        <div>
+                            <label for="sale-quantity-input" class="block text-gray-400 text-sm font-bold mb-2">Cantidad:</label>
+                            <input type="number" id="sale-quantity-input" placeholder="Cantidad" required min="1">
+                        </div>
+                        <div>
+                            <label for="sale-date-input" class="block text-gray-400 text-sm font-bold mb-2">Fecha de Venta:</label>
+                            <input type="date" id="sale-date-input" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="sale-customer-select" class="block text-gray-400 text-sm font-bold mb-2">Cliente:</label>
+                            <select id="sale-customer-select"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline bg-white-700 border-gray-600">
+                            <option value="">Selecciona un cliente (Opcional)</option>
+                            </select>
+                            <small class="text-gray-500 text-xs italic mt-1">Puedes dejarlo en blanco si la venta no tiene cliente asociado.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sale-payment-type" class="block text-gray-400 text-sm font-bold mb-2">Tipo de Pago:</label>
+                            <select id="sale-payment-type" class="w-full p-2.5 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:ring-2 focus:ring-blue-500">
+                                <option value="cash">Contado</option>
+                                <option value="credit">Crédito</option>
+                            </select>
+                        </div>
+
+                        <div id="credit-details-group" class="hidden space-y-4">
+                            <div class="form-group">
+                                <label for="sale-amount-paid" class="block text-gray-400 text-sm font-bold mb-2">Monto Pagado Inicial:</label>
+                                <input type="number" id="sale-amount-paid" placeholder="Monto recibido inicialmente" step="0.01" min="0" class="w-full p-2.5 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <!--
+                            <div class="form-group">
+                                <label for="sale-customer-name" class="block text-gray-400 text-sm font-bold mb-2">Cliente (Crédito):</label>
+                                <input type="text" id="sale-customer-name" placeholder="Nombre del cliente" class="w-full p-2.5 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            -->
+                        </div>
+                        
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Registrar Venta</button>
+                    </form>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-300">Historial de Ventas</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-gray-700 rounded-lg overflow-hidden data-table">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Producto</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Cantidad</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">P. Unitario</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Total Venta</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Tipo Pago</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Pagado</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Saldo</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Cliente</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sales-history-tbody" class="divide-y divide-gray-600">
+                                <!-- Historial de Ventas -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="inventory" class="tab-content p-6 bg-gray-800 rounded-lg shadow-lg mb-6">
+                <h2 class="section-title text-2xl font-semibold mb-6 text-center text-blue-300">Gestión de Inventario</h2>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-300">Ajustar Stock</h3>
+                    <form id="stock-adjustment-form" class="space-y-4">
+                        <div>
+                            <label for="inventory-product-select" class="block text-gray-400 text-sm font-bold mb-2">Producto:</label>
+                            <select id="inventory-product-select" required></select>
+                        </div>
+                        <div>
+                            <label for="adjustment-type" class="block text-gray-400 text-sm font-bold mb-2">Tipo de Ajuste:</label>
+                            <select id="adjustment-type" required>
+                                <option value="add">Entrada (Añadir Stock)</option>
+                                <option value="remove">Salida (Quitar Stock)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="adjustment-quantity" class="block text-gray-400 text-sm font-bold mb-2">Cantidad:</label>
+                            <input type="number" id="adjustment-quantity" placeholder="Cantidad" required min="1">
+                        </div>
+                        <div>
+                            <label for="adjustment-reason" class="block text-gray-400 text-sm font-bold mb-2">Razón del Ajuste:</label>
+                            <textarea id="adjustment-reason" placeholder="Ej: Error de conteo, devolución, producto dañado, etc." rows="2" required></textarea>
+                        </div>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Realizar Ajuste</button>
+                    </form>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-300">Historial de Ajustes de Inventario</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-gray-700 rounded-lg overflow-hidden data-table">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Producto</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Tipo</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Cantidad</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Razón</th>
+                                    <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventory-history-tbody" class="divide-y divide-gray-600">
+                                <!-- Historial de Ajustes -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        <section id="reportes" class="tab-content hidden p-6 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <h2 class="section-title text-2xl font-semibold mb-6 text-center text-blue-300">Sistema de Reportes</h2>
+    
+            <!-- Menú interno para subcategorías de reporte -->
+            <div class="reportes-nav flex flex-wrap justify-center space-x-2 mb-6">
+                <button class="reportes-tab nav-button active" data-report="transacciones-dia">Transacciones Por Día</button>
+                <button class="reportes-tab nav-button" data-report="resumen-transacciones">Resumen Transacciones</button>
+                <button class="reportes-tab nav-button" data-report="ventas-credito">Ventas Crédito</button>
+                <button class="reportes-tab nav-button" data-report="compras-credito">Compras Crédito</button>
+                <button class="reportes-tab nav-button" data-report="ingreso-extra-credito">Ingreso Extra Crédito</button>
+                <button class="reportes-tab nav-button" data-report="gasto-extra-credito">Gasto Extra Crédito</button>
+                <button class="reportes-tab nav-button" data-report="prestamos-activos">Préstamos Activos</button>
+                <button class="reportes-tab nav-button" data-report="rentas-activas">Rentas Activas</button>
+            </div>
+    
+            <!-- Contenedor donde se mostrará el contenido del reporte seleccionado -->
+            <div id="reportes-content">
+                <p class="text-center text-gray-400">Selecciona un reporte para visualizar su información.</p>
+            </div>
+        </section>
+
+        <section id="clientes" class="tab-content hidden p-6 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <h2 class="section-title text-2xl font-semibold mb-6 text-center text-blue-300">Gestión de Clientes</h2>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-gray-300">Añadir Nuevo Cliente</h3>
+                <form id="client-form" class="space-y-4">
+                    <div>
+                        <label for="client-name-input" class="block text-gray-400 text-sm font-bold mb-2">Nombre del Cliente:</label>
+                        <input type="text" id="client-name-input" placeholder="Ingrese el nombre completo" required class="w-full p-2.5 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="client-phone-input" class="block text-gray-400 text-sm font-bold mb-2">Teléfono (Opcional):</label>
+                        <input type="number" id="client-phone-input" placeholder="Ej: 555-1234" class="w-full p-2.5 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="client-email-input" class="block text-gray-400 text-sm font-bold mb-2">Email (Opcional):</label>
+                        <input type="email" id="client-email-input" placeholder="cliente@ejemplo.com" class="w-full p-2.5 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Añadir Cliente</button>
+                </form>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-gray-300">Lista de Clientes</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-gray-700 rounded-lg overflow-hidden data-table">
+                        <thead>
+                            <tr>
+                                <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">ID</th>
+                                <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Nombre</th>
+                                <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Teléfono</th>
+                                <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Email</th>
+                                <th class="py-3 px-4 bg-gray-600 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clients-list-tbody" class="divide-y divide-gray-600">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="reportes" class="tab-content hidden p-6 bg-gray-800 rounded-lg shadow-lg mb-6">
+            </section>
+
+       </main>
+    </div>
+
+    <div id="toast-notifications-container" class="fixed bottom-4 right-4 z-50 space-y-3"> </div>
+    <script src="db.js"></script>
+    <script src="clients.js"></script>
+    <script src="reports.js"></script>
+    <script src="utils/notifications.js"></script>
+    <script src="script.js"></script>
+    
+    
+</body>
+</html>

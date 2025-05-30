@@ -1,0 +1,70 @@
+/* Contenedor principal de las notificaciones */
+#toast-notifications-container {
+    /*
+    Estas clases de Tailwind ya las pusimos en el HTML, pero las dejo
+    comentadas aquí para que sepas su función:
+    position: fixed;
+    bottom: 1rem; (bottom-4)
+    right: 1rem;  (right-4)
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; (space-y-3)
+    */
+    max-width: 320px; /* Ancho máximo para que no sean demasiado grandes */
+}
+
+/* Estilo base para cada notificación */
+.toast-notification {
+    padding: 1rem 1.25rem; /* Relleno interno */
+    border-radius: 0.5rem; /* Bordes redondeados (rounded-lg) */
+    color: white; /* Color del texto */
+    font-weight: 500; /* Peso de la fuente (font-medium) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    opacity: 0; /* Inicialmente invisible */
+    transform: translateY(20px); /* Ligeramente desplazado hacia abajo */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Transición suave */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Espacio entre el icono y el texto */
+}
+
+/* Modificador para mostrar la notificación */
+.toast-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Colores para notificaciones de éxito */
+.toast-notification.success {
+    background-color: #34d399; /* Tailwind green-500 */
+    border-left: 5px solid #10b981; /* Tailwind green-600 para un borde izquierdo */
+}
+
+/* Colores para notificaciones de error */
+.toast-notification.error {
+    background-color: #ef4444; /* Tailwind red-500 */
+    border-left: 5px solid #dc2626; /* Tailwind red-600 para un borde izquierdo */
+}
+
+/* Colores para notificaciones de información/advertencia */
+.toast-notification.info {
+    background-color: #60a5fa; /* Tailwind blue-400 */
+    border-left: 5px solid #3b82f6; /* Tailwind blue-500 para un borde izquierdo */
+}
+
+/* Estilo para el botón de cerrar (opcional, si lo añades en JS) */
+.toast-notification .close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    margin-left: auto; /* Empuja el botón a la derecha */
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.toast-notification .close-button:hover {
+    opacity: 1;
+}
